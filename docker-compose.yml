@@ -7,21 +7,21 @@ services:
                 uid: 1000
             context: ./
             dockerfile: Dockerfile
-        image: laravel_8_base
-        container_name: laravel_8_base-app
+        image: intertienda_back_v1
+        container_name: intertienda_back_v1-app
         restart: unless-stopped
         working_dir: /var/www/
         volumes:
             - .:/var/www
         networks:
-            - laravel_8_base
+            - intertienda_back_v1
 
     db:
         image: mysql:5.7
-        container_name: laravel_8_base-db
+        container_name: intertienda_back_v1-db
         restart: unless-stopped
         environment:
-            MYSQL_DATABASE: laravel_8_base_db
+            MYSQL_DATABASE: intertienda_back_v1_db
             MYSQL_ROOT_PASSWORD: 12345
             MYSQL_PASSWORD: 12345
             MYSQL_USER: docker_user
@@ -30,11 +30,11 @@ services:
         volumes:
             - ./docker/mysql/data_db:/var/lib/mysql
         networks:
-            - laravel_8_base
+            - intertienda_back_v1
 
     nginx:
         image: nginx:alpine
-        container_name: laravel_8_base-nginx
+        container_name: intertienda_back_v1-nginx
         restart: unless-stopped
         ports:
             - 8000:80
@@ -42,9 +42,9 @@ services:
             - .:/var/www
             - ./docker/nginx:/etc/nginx/conf.d/
         networks:
-            - laravel_8_base
+            - intertienda_back_v1
 
 networks:
-    laravel_8_base:
+    intertienda_back_v1:
         driver: bridge
 #https://www.digitalocean.com/community/tutorials/how-to-install-and-set-up-laravel-with-docker-compose-on-ubuntu-20-04-es
